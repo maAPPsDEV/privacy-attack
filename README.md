@@ -125,7 +125,7 @@ truffle develop
 test
 ```
 
-You should take ownership of the target contract successfully.
+You should unlock contract successfully.
 
 ```
 truffle(develop)> test
