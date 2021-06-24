@@ -1,18 +1,19 @@
-# Solidity Game - [Game Title] Attack
+# Solidity Game - Privacy Attack
 
-_Inspired by OpenZeppelin's [Ethernaut](https://ethernaut.openzeppelin.com), [Game Title] Level_
+_Inspired by OpenZeppelin's [Ethernaut](https://ethernaut.openzeppelin.com), Privacy Level_
 
 ⚠️Do not try on mainnet!
 
 ## Task
 
-Hacker the basic token contract below.
-
-1. You are given 20 tokens to start with and you will beat the game if you somehow manage to get your hands on any additional tokens. Preferably a very large amount of tokens.
+The creator of this contract was careful enough to protect the sensitive areas of its storage.
+Unlock this contract.
 
 _Hint:_
 
-1. What is an odometer?
+1. Understanding how storage works
+2. Understanding how parameter parsing works
+3. Understanding how casting works
 
 ## What will you learn?
 
@@ -20,6 +21,8 @@ _Hint:_
    
    > State variables of contracts are stored in storage in a compact way such that multiple values sometimes use the same storage slot.
    > For each variable, a size in bytes is determined according to its type. Multiple, contiguous items that need less than 32 bytes are packed into a single storage slot if possible.
+
+![storage1](https://user-images.githubusercontent.com/78368735/123262979-dcf00100-d4ce-11eb-8696-f71659ab509f.jpeg)
 
 2. [Mappings and Dynamic Arrays](https://docs.soliditylang.org/en/v0.8.5/internals/layout_in_storage.html#mappings-and-dynamic-arrays)
 
@@ -38,11 +41,13 @@ From Solidity [docs](https://docs.soliditylang.org/en/v0.8.5/internals/layout_in
 #### Less Efficient Storage Use
 
 Here’s an example of inefficient storage usage. Notice that smaller size variables like `boolVar` and `bytes4Var` are not sequentially initialized, taking new slots 0 and 2 when they could have been packed together:
+![storage2](https://user-images.githubusercontent.com/78368735/123262993-e1b4b500-d4ce-11eb-889c-206d14f1baf9.jpeg)
 
 #### More Efficient Storage Use
 
 A more efficient storage method would be to sequentially declare the `bool` (1 byte size) and the `bytes4` (4 bytes size) variables. The EVM then efficiently packs the two into a single storage slot.
 Likewise, in the `Object` `struct`, the more efficient method is to pack the two `uint8`s together, taking up 1 slot. This way, all future instances of Object only take 2 slots to store, rather than 3. Storage optimization is especially important in structs, as the storage can grow rapidly:
+![storage3](https://user-images.githubusercontent.com/78368735/123263231-1fb1d900-d4cf-11eb-9bd3-3342dfdfb39d.jpeg)
 
 **Notice:** slots index at 0 from RIGHT to LEFT. `bytes4Var` is initialized after `boolVar`, so its stored to the left of `boolVar`, exactly 1 byte from the right.
 
