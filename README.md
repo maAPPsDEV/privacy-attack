@@ -138,10 +138,19 @@ Compiling your contracts...
 
 
 
+data [
+  '0xcc8db7b17346a0c3e6cba83affe8a88a9f86455f9f9619d2f59c271a9b3a8f60',
+  '0xb5319411b04e31d05369dc5ff929a09dbe4e49aace036d6f5ad79dec33f681f4',
+  '0x6cb79e2ea29b85193ccb73ca2d1939bcfcc2259e3745c0099d5662958209ca4f'
+]
+
+
   Contract: Hacker
-    √ should steal countless of tokens (377ms)
+data2 0x6cb79e2ea29b85193ccb73ca2d1939bcfcc2259e3745c0099d5662958209ca4f
+key 0x6cb79e2ea29b85193ccb73ca2d1939bc 34
+    √ should unlock contract (362ms)
 
 
-  1 passing (440ms)
+  1 passing (434ms)
 
 ```
