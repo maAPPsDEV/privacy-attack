@@ -18,7 +18,7 @@ _Hint:_
 ## What will you learn?
 
 1. [Layout of State Variables in Storage](https://docs.soliditylang.org/en/v0.8.5/internals/layout_in_storage.html)
-   
+
    > State variables of contracts are stored in storage in a compact way such that multiple values sometimes use the same storage slot.
    > For each variable, a size in bytes is determined according to its type. Multiple, contiguous items that need less than 32 bytes are packed into a single storage slot if possible.
 
@@ -52,19 +52,23 @@ Likewise, in the `Object` `struct`, the more efficient method is to pack the two
 **Notice:** slots index at 0 from RIGHT to LEFT. `bytes4Var` is initialized after `boolVar`, so its stored to the left of `boolVar`, exactly 1 byte from the right.
 
 **Exceptions:**
+
 1. `constants` are not stored in storage. From Solidity [documentation](https://docs.soliditylang.org/en/v0.8.5/contracts.html), that the compiler does not reserve a storage slot for `constant` variables. This means you won’t find the following in any storage slots:
+
 ```
 contract A {
     uint public constant number = ...; //not stored in storage
 }
 ```
+
 2. Mappings and dynamically-sized arrays do not stick to these conventions.
 
 ### Security Considerations
-* In general, excessive slot usage wastes gas, especially if you declared structs that will reproduce many instances. **Remember to optimize your storage to save gas!**
-* Save your variables to `memory` if you don’t need to persist smart contract state. `SSTORE` & `SLOAD` are very gas intensive opcodes.
-* All storage is publicly visible on the blockchain, even your `private` variables!
-* Never store passwords and private keys without hashing them first.
+
+- In general, excessive slot usage wastes gas, especially if you declared structs that will reproduce many instances. **Remember to optimize your storage to save gas!**
+- Save your variables to `memory` if you don’t need to persist smart contract state. `SSTORE` & `SLOAD` are very gas intensive opcodes.
+- All storage is publicly visible on the blockchain, even your `private` variables!
+- Never store passwords and private keys without hashing them first.
 
 ## Source Code
 
